@@ -1,6 +1,9 @@
 # Echo Nest
 
-Social media web
+Social media website
 
-React 
-TailwindCss
+- React 
+- React Routers
+- React Icons
+- Axios
+- TailwindCss

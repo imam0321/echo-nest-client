@@ -1,10 +1,22 @@
+import { Route, Routes } from "react-router-dom"
+import Home from "./pages/Home/Home"
+import Login from "./pages/Login/Login"
+import SignUp from "./pages/SignUp/SignUp"
+import Profile from "./pages/Profile/Profile"
+import NotFound from "./pages/Share/NotFound"
 
 function App() {
 
   return (
-    <>
-      <p className='text-3xl text-center'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum nisi qui molestiae pariatur temporibus repudiandae accusantium maxime fuga debitis rerum quasi reprehenderit quis officiis laudantium aspernatur officia ipsam, perspiciatis commodi.</p>
-    </>
+    <Routes>
+      <Route element={<Home/>} path="/" exact />
+      <Route element={<Login/>} path="/login" />
+      <Route element={<SignUp/>} path="/signUp" />
+      <Route element={<Profile/>} path="/me" />
+
+
+      <Route element={<NotFound/>} path="*" />
+    </Routes>
   )
 }
 
