@@ -28,7 +28,7 @@ body {
   @apply leading-[138%] lg:text-lg;
 }
 .auth-input {
-  @apply w-full rounded-md border border-[#CCCCCC]/[14%] bg-[#27292F]  p-1.5 focus:outline-none lg:p-3;
+  @apply w-full rounded-md border border-[#CCCCCC]/[14%] p-1.5 focus:outline-none lg:p-3;
 }
 
 .post-avater {
