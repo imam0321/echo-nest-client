@@ -37,7 +37,7 @@ export default function useAxios() {
             );
 
             const { token } = response.data;
-            console.log(token);
+            console.log(`new Token: ${token}`);
             // set new token in auth
             setAuth({ ...auth, authToken: token });
             // set new token in headers

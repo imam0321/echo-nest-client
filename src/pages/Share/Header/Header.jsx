@@ -1,4 +1,4 @@
-import HomeIcon from "../../../assets/icons/3dots.svg"
+import HomeIcon from "../../../assets/icons/home.svg"
 import Notification from "../../../assets/icons/notification.svg"
 import Avatar from "../../../assets/images/avatars/avatar_1.png"
 import LogOutIcon from "../../../assets/icons/logout.svg"
@@ -7,9 +7,10 @@ import useAuth from "../../../hooks/useAuth"
 
 export default function Header() {
   const navigate = useNavigate();
-  const { auth } = useAuth();
+  const { auth, setAuth } = useAuth();
 
   const handleLogout = () => {
+    setAuth({});
     navigate("/login")
   }
   return (
