@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import Field from '../Share/Fields/Field';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import axios from 'axios';
 
 
 export default function LoginForm() {
@@ -13,13 +14,32 @@ export default function LoginForm() {
     register,
     handleSubmit,
     formState: { errors },
+    setError
   } = useForm();
 
-  const submitForm = (formData) => {
-    console.log(formData);
-    const user = {...formData}
-    setAuth({user})
-    navigate("/")
+  const submitForm = async (formData) => {
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_SERVER_BASE_URL}/auth/login`, formData)
+
+      if (response.status === 200) {
+        const { user, token } = response.data;
+        if (token) {
+          const authToken = token.token;
+          const refreshToken = token.refreshToken;
+
+          console.log(`Login time token: ${authToken}`);
+          setAuth({ user, authToken, refreshToken })
+          navigate("/")
+        }
+      }
+
+    } catch (error) {
+      setError("root.random", {
+        type: "random",
+        message: `User with email ${formData.email} is not found`
+      })
+    }
+
   }
 
   return (
@@ -34,7 +54,7 @@ export default function LoginForm() {
           type="email"
           name="email"
           id="email"
-          className={`w-full rounded-md border p-1.5 focus:outline-none lg:p-3 ${errors.email ? "border-red-500" : "border-[#CCCCCC]/[14%]"}`} 
+          className={`w-full rounded-md border p-1.5 focus:outline-none lg:p-3 ${errors.email ? "border-red-500" : "border-[#CCCCCC]/[14%]"}`}
         />
       </Field>
       <Field label="Password" error={errors.password}>
@@ -44,6 +64,7 @@ export default function LoginForm() {
           name='password'
           className={`w-full rounded-md border p-1.5 focus:outline-none lg:p-3 ${errors.password ? "border-red-500" : "border-[#CCCCCC]/[14%]"}`} />
       </Field>
+      <p className='text-red-500 my-2'>{errors?.root?.random?.message}</p>
       <Field>
         <button
           className="auth-input bg-[#00D991] font-bold text-[#17181C] transition-all hover:opacity-90"

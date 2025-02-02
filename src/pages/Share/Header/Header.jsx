@@ -3,9 +3,11 @@ import Notification from "../../../assets/icons/notification.svg"
 import Avatar from "../../../assets/images/avatars/avatar_1.png"
 import LogOutIcon from "../../../assets/icons/logout.svg"
 import { Link, useNavigate } from 'react-router-dom'
+import useAuth from "../../../hooks/useAuth"
 
 export default function Header() {
   const navigate = useNavigate();
+  const { auth } = useAuth();
 
   const handleLogout = () => {
     navigate("/login")
@@ -29,11 +31,11 @@ export default function Header() {
             <img src={LogOutIcon} alt="Logout" />
           </button>
 
-          <button className="flex-center !ml-8 gap-3">
-            <span className="text-lg font-medium lg:text-xl">Imam</span>
+          <Link to="/me" className="flex-center !ml-8 gap-3">
+            <span className="text-lg font-medium lg:text-xl">{auth?.user?.firstName}{" "}{auth?.user?.lastName}</span>
             <img className="max-h-[32px] max-w-[32px] lg:max-h-[44px] lg:max-w-[44px]"
               src={Avatar} alt="" />
-          </button>
+          </Link>
         </div>
       </div>
     </nav>
