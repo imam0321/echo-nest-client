@@ -4,18 +4,22 @@ import Login from "./pages/Login/Login"
 import SignUp from "./pages/SignUp/SignUp"
 import Profile from "./pages/Profile/Profile"
 import NotFound from "./pages/Share/NotFound"
+import PrivateRouter from "./routers/PrivateRouter"
 
 function App() {
 
   return (
     <Routes>
-      <Route element={<Home/>} path="/" exact />
-      <Route element={<Login/>} path="/login" />
-      <Route element={<SignUp/>} path="/signUp" />
-      <Route element={<Profile/>} path="/me" />
+      <Route element={<Login />} path="/login" />
+      <Route element={<SignUp />} path="/signUp" />
 
+      <Route element={<PrivateRouter />}>
+        <Route element={<Home />} path="/" exact />
+        <Route element={<Profile />} path="/me" />
 
-      <Route element={<NotFound/>} path="*" />
+      </Route>
+      
+      <Route element={<NotFound />} path="*" />
     </Routes>
   )
 }

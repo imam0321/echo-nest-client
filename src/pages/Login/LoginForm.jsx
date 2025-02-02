@@ -2,9 +2,13 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import Field from '../Share/Fields/Field';
 import { useNavigate } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
+
 
 export default function LoginForm() {
   const navigate = useNavigate();
+  const { setAuth } = useAuth()
+
   const {
     register,
     handleSubmit,
@@ -13,6 +17,8 @@ export default function LoginForm() {
 
   const submitForm = (formData) => {
     console.log(formData);
+    const user = {...formData}
+    setAuth({user})
     navigate("/")
   }
 
@@ -28,7 +34,7 @@ export default function LoginForm() {
           type="email"
           name="email"
           id="email"
-          className={`w-full rounded-md border p-1.5 focus:outline-none lg:p-3 ${errors.email ? "border-red-500" : "border-[#CCCCCC]/[14%]"}`}
+          className={`w-full rounded-md border p-1.5 focus:outline-none lg:p-3 ${errors.email ? "border-red-500" : "border-[#CCCCCC]/[14%]"}`} 
         />
       </Field>
       <Field label="Password" error={errors.password}>

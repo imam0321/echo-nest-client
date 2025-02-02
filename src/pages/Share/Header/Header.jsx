@@ -13,7 +13,7 @@ export default function Header() {
   return (
     <nav className="sticky top-0 z-50 border-b border-[#3F3F3F] bg-[#1E1F24] py-4">
       <div className="container flex flex-col items-center justify-between gap-6 sm:flex-row">
-        <Link to="/" className="text-2xl ms-8">
+        <Link to="/" className="text-2xl ms-12">
           Echo Nest
         </Link>
 
