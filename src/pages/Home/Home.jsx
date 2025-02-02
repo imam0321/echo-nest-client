@@ -1,7 +1,10 @@
+import Header from "../Share/Header/Header";
 
 
 export default function Home() {
   return (
-    <div>Home</div>
+    <div>
+      <Header/>
+    </div>
   )
 }
