@@ -38,7 +38,7 @@ export default function Profile() {
   return (
     <>
       <ProfileInfo />
-      {/* <MyPosts /> */}
+      <MyPosts />
     </>
   )
 }
