@@ -4,10 +4,14 @@ import Avatar from "../../../assets/images/avatars/avatar_1.png"
 import LogOutIcon from "../../../assets/icons/logout.svg"
 import { Link, useNavigate } from 'react-router-dom'
 import useAuth from "../../../hooks/useAuth"
+import useProfile from "../../../hooks/useProfile"
 
 export default function Header() {
   const navigate = useNavigate();
   const { auth, setAuth } = useAuth();
+  const { state } = useProfile();
+
+  const user = state?.user ?? auth?.user;
 
   const handleLogout = () => {
     setAuth({});
@@ -33,9 +37,9 @@ export default function Header() {
           </button>
 
           <Link to="/me" className="flex-center !ml-8 gap-3">
-            <span className="text-lg font-medium lg:text-xl">{auth?.user?.firstName}{" "}{auth?.user?.lastName}</span>
+            <span className="text-lg font-medium lg:text-xl">{user?.firstName}{" "}{user?.lastName}</span>
             <img className="max-h-[32px] max-w-[32px] lg:max-h-[44px] lg:max-w-[44px]"
-              src={Avatar} alt="" />
+              src={`${import.meta.env.VITE_SERVER_BASE_URL}/${user?.avatar}`} alt="" />
           </Link>
         </div>
       </div>
