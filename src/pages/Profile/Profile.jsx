@@ -23,6 +23,7 @@ export default function Profile() {
         setLoading(false)
       } catch (error) {
         console.log(error);
+        setError(error)
       }
     }
 

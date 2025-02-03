@@ -27,7 +27,7 @@ export default function LoginForm() {
           const authToken = token.token;
           const refreshToken = token.refreshToken;
 
-          console.log(`Login time token: ${authToken}`);
+          // console.log(`Login time token: ${authToken}`);
           setAuth({ user, authToken, refreshToken })
           navigate("/")
         }

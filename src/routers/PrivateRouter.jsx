@@ -2,6 +2,7 @@ import React from 'react'
 import useAuth from '../hooks/useAuth'
 import Header from "../pages/Share/Header/Header"
 import { Navigate, Outlet } from 'react-router-dom';
+import ProfileProvider from '../providers/ProfileProvider';
 
 export default function PrivateRouter() {
   const { auth } = useAuth();
@@ -9,14 +10,16 @@ export default function PrivateRouter() {
   return (
     <>
       {
-        auth?.user ? (
+        auth?.authToken ? (
           <>
-            <Header />
-            <div className='mx-auto max-w-[1020px] py-8'>
-              <div className="container">
-                <Outlet />
+            <ProfileProvider>
+              <Header />
+              <div className='mx-auto max-w-[1020px] py-8'>
+                <div className="container">
+                  <Outlet />
+                </div>
               </div>
-            </div>
+            </ProfileProvider>
           </>
         ) : (
           <Navigate to="/login" />
