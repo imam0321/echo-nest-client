@@ -1,6 +1,6 @@
 import HomeIcon from "../../../assets/icons/home.svg"
 import Notification from "../../../assets/icons/notification.svg"
-import Avatar from "../../../assets/images/avatars/avatar_1.png"
+import BlankProfile from "../../../assets/images/blankProfile.jpeg"
 import LogOutIcon from "../../../assets/icons/logout.svg"
 import { Link, useNavigate } from 'react-router-dom'
 import useAuth from "../../../hooks/useAuth"
@@ -39,7 +39,11 @@ export default function Header() {
           <Link to="/me" className="flex-center !ml-8 gap-3">
             <span className="text-lg font-medium lg:text-xl">{user?.firstName}{" "}{user?.lastName}</span>
             <img className="max-h-[32px] max-w-[32px] lg:max-h-[44px] lg:max-w-[44px] rounded-full"
-              src={`${import.meta.env.VITE_SERVER_BASE_URL}/${user?.avatar}`} alt="" />
+              src={
+                user?.avatar
+                  ? `${import.meta.env.VITE_SERVER_BASE_URL}/${user?.avatar}`
+                  : BlankProfile
+              } alt="profile" />
           </Link>
         </div>
       </div>

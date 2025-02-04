@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import useAvatar from '../../hooks/useAvatar';
+import BlankProfile from "../../assets/images/blankProfile.jpeg"
 
 export default function PostComments({ post }) {
   const [showAction, setShowAction] = useState(false);
@@ -11,7 +12,7 @@ export default function PostComments({ post }) {
       <div className="flex-center mb-3 gap-2 lg:gap-4">
         <img
           className="max-w-7 max-h-7 rounded-full lg:max-h-[34px] lg:max-w-[34px]"
-          src={avatarURL}
+          src={avatarURL || BlankProfile}
           alt="avatar"
         />
 
@@ -36,7 +37,7 @@ export default function PostComments({ post }) {
             comments.map(comment => <div key={comment?.id} className="flex items-center gap-3 pt-4">
               <img
                 className="max-w-6 max-h-6 rounded-full"
-                src={`${import.meta.env.VITE_SERVER_BASE_URL}/${comment?.author?.avatar}`}
+                src={comment?.author?.avatar ? `${import.meta.env.VITE_SERVER_BASE_URL}/${comment?.author?.avatar}` : BlankProfile}
                 alt="avatar"
               />
               <div>

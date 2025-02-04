@@ -1,5 +1,6 @@
 import EditIcon from "../../assets/icons/edit.svg"
 import CheckIcon from "../../assets/icons/check.svg"
+import BlankProfile from "../../assets/images/blankProfile.jpeg"
 import useProfile from "../../hooks/useProfile";
 import { useRef, useState } from "react";
 import useAxios from "../../hooks/useAxios";
@@ -19,7 +20,7 @@ export default function ProfileInfo() {
     fileUploadRef.current.addEventListener("change", uploadImageDisplay)
     fileUploadRef.current.click();
   }
-  
+
   // upload avatar by upload function
   const uploadImageDisplay = async () => {
     const formData = new FormData();
@@ -68,7 +69,11 @@ export default function ProfileInfo() {
       >
         <img
           className="max-w-full rounded-full"
-          src={`${import.meta.env.VITE_SERVER_BASE_URL}/${state?.user?.avatar}`}
+          src={
+            state?.user?.avatar
+              ? `${import.meta.env.VITE_SERVER_BASE_URL}/${state.user.avatar}`
+              : BlankProfile
+          }
           alt={state?.user?.firstName}
         />
 

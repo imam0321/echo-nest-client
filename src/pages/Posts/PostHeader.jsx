@@ -1,6 +1,7 @@
 import TimeIcon from "../../assets/icons/time.svg"
 import ThreeDotsIcon from "../../assets/icons/3dots.svg"
 import EditIcon from "../../assets/icons/edit.svg"
+import BlankProfile from "../../assets/images/blankProfile.jpeg"
 import DeleteIcon from "../../assets/icons/delete.svg"
 import { getDateDifferenceFromNow } from "../../utils"
 import useAvatar from "../../hooks/useAvatar"
@@ -14,7 +15,7 @@ export default function PostHeader({ post }) {
       <div className="flex items-center gap-3">
         <img
           className="max-w-10 max-h-10 rounded-full lg:max-h-[58px] lg:max-w-[58px]"
-          src={avatarURL}
+          src={avatarURL || BlankProfile}
           alt="avatar"
         />
         <div>

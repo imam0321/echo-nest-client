@@ -1,15 +1,11 @@
 import React from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form';
 import Field from '../Share/Fields/Field';
-import { useNavigate } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-
-export default function LoginForm() {
+export default function SignUpForm() {
   const navigate = useNavigate();
-  const { setAuth } = useAuth()
-
   const {
     register,
     handleSubmit,
@@ -19,27 +15,17 @@ export default function LoginForm() {
 
   const submitForm = async (formData) => {
     try {
-      const response = await axios.post(`${import.meta.env.VITE_SERVER_BASE_URL}/auth/login`, formData)
+      const response = await axios.post(`${import.meta.env.VITE_SERVER_BASE_URL}/auth/register`, formData)
 
-      if (response.status === 200) {
-        const { user, token } = response.data;
-        if (token) {
-          const authToken = token.token;
-          const refreshToken = token.refreshToken;
-
-          // console.log(`Login time token: ${authToken}`);
-          setAuth({ user, authToken, refreshToken })
-          navigate("/")
-        }
+      if (response.status === 201) {
+        navigate("/login")
       }
-
     } catch (error) {
       setError("root.random", {
         type: "random",
-        message: `User with email ${formData.email} is not found`
+        message: `Something went ${formData.email}`
       })
     }
-
   }
 
   return (
@@ -47,7 +33,27 @@ export default function LoginForm() {
       className="border-b border-[#3F3F3F] pb-10 lg:pb-[30px]"
       onSubmit={handleSubmit((submitForm))}
     >
+      <div className="flex justify-between items-center gap-x-2">
 
+        <Field label="First Name" error={errors.firstName}>
+          <input
+            {...register("firstName", { required: "First Name is Required" })}
+            type="text"
+            name="firstName"
+            id="firstName"
+            className={`w-full rounded-md border p-1.5 focus:outline-none lg:p-3 ${errors.firstName ? "border-red-500" : "border-[#CCCCCC]/[14%]"}`}
+          />
+        </Field>
+        <Field label="Last Name" error={errors.lastName}>
+          <input
+            {...register("lastName", { required: "Last Name is Required" })}
+            type="text"
+            name="lastName"
+            id="lastName"
+            className={`w-full rounded-md border p-1.5 focus:outline-none lg:p-3 ${errors.lastName ? "border-red-500" : "border-[#CCCCCC]/[14%]"}`}
+          />
+        </Field>
+      </div>
       <Field label="Email" error={errors.email}>
         <input
           {...register("email", { required: "Email is Required" })}
@@ -70,7 +76,7 @@ export default function LoginForm() {
           className="auth-input bg-[#00D991] font-bold text-[#17181C] transition-all hover:opacity-90"
           type="submit"
         >
-          Login
+          Register
         </button>
       </Field>
     </form>

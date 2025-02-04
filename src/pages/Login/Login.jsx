@@ -5,7 +5,7 @@ import LoginForm from "./LoginForm";
 export default function Login() {
   return (
     <>
-      <main className="flex min-h-screen items-center justify-center py-8">
+      <main className="flex min-h-screen items-center justify-center bg-[#17181C] py-8">
         <div className="max-w-[1268px] flex-1">
           <div className="container grid items-center gap-8 lg:grid-cols-2">
             <div>
