@@ -18,7 +18,7 @@ const postReducer = (state, action) => {
       return {
         ...state,
         loading: false,
-        post: action.data.post,
+        posts: action.data,
       };
     }
     case actions.post.DATA_FETCHING_ERROR: {

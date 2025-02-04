@@ -4,8 +4,7 @@ import useAvatar from '../../hooks/useAvatar';
 export default function PostComments({ post }) {
   const [showAction, setShowAction] = useState(false);
   const { avatarURL } = useAvatar(post);
-  const comments = post?.comments
-  console.log(comments);
+  const comments = post?.comments;
 
   return (
     <div>
