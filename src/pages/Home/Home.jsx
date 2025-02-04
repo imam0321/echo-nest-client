@@ -3,6 +3,7 @@ import PostList from "../Posts/PostList";
 import useAxios from "../../hooks/useAxios";
 import { actions } from "../../actions";
 import usePost from "../../hooks/usePost";
+import NewPost from "../Posts/NewPost";
 
 
 export default function Home() {
@@ -36,6 +37,7 @@ export default function Home() {
 
   return (
     <div>
+      <NewPost />
       <PostList posts={state?.posts} />
     </div>
   )
