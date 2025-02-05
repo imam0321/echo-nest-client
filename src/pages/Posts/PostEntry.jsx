@@ -6,8 +6,9 @@ import Field from "../Share/Fields/Field";
 import useAxios from "../../hooks/useAxios";
 import usePost from "../../hooks/usePost";
 import useProfile from "../../hooks/useProfile";
+import { actions } from "../../actions";
 
-export default function PostEntry() {
+export default function PostEntry({onCreated}) {
   const { auth } = useAuth();
   const { api } = useAxios();
   const { dispatch } = usePost();
@@ -22,8 +23,21 @@ export default function PostEntry() {
     setError
   } = useForm();
 
-  const handlePostSubmit = (formData) => {
-    console.log(formData);
+  const handlePostSubmit = async (formData) => {
+    dispatch({ type: actions.post.DATA_FETCHING })
+    try {
+      const response = await api.post(`${import.meta.env.VITE_SERVER_BASE_URL}/posts`, { formData });
+
+      if (response.status === 200) {
+        dispatch({ type: actions.post.DATA_CREATED, data: response.data })
+        onCreated()
+      }
+      
+
+    } catch (error) {
+      console.log(error);
+      dispatch({ type: actions.post.DATA_FETCHING_ERROR, error: error.message })
+    }
   }
 
 
@@ -56,8 +70,9 @@ export default function PostEntry() {
             <input type="file" name="photo" id="photo" className="hidden" />
           </div>
 
-          <Field label="" >
+          <Field label="" error={errors.content}>
             <textarea
+              {...register("content", { required: "adding some text.." })}
               name="content"
               id="content"
               placeholder="Share your thoughts..."

@@ -27,6 +27,10 @@ export default function Home() {
     fetchPosts()
   }, [])
 
+  const posts = state?.posts
+  // posts sort by Created time 
+  const sortedPosts = posts?.slice().sort((a, b) => new Date(b.createAt) - new Date(a.createAt));
+
   if (state.loading) {
     return <div>Posts is Loading</div>
   }
@@ -38,7 +42,7 @@ export default function Home() {
   return (
     <div>
       <NewPost />
-      <PostList posts={state?.posts} />
+      <PostList posts={sortedPosts} />
     </div>
   )
 }
