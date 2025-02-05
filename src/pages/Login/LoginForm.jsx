@@ -28,7 +28,10 @@ export default function LoginForm() {
           const refreshToken = token.refreshToken;
 
           // console.log(`Login time token: ${authToken}`);
-          setAuth({ user, authToken, refreshToken })
+          const authData = { user, authToken, refreshToken };
+          localStorage.setItem("auth", JSON.stringify(authToken));
+
+          setAuth(authData);
           navigate("/")
         }
       }

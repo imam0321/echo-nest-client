@@ -14,6 +14,7 @@ export default function Header() {
   const user = state?.user ?? auth?.user;
 
   const handleLogout = () => {
+    localStorage.removeItem('auth');
     setAuth({});
     navigate("/login")
   }
