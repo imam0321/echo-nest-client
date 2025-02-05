@@ -9,6 +9,7 @@ export default function PostComments({ post }) {
   const [showAction, setShowAction] = useState(false);
   const [comments, setComments] = useState(post?.comments);
   const [comment, setComment] = useState("");
+  
 
   const addComment = async (e) => {
     const keyCode = e.keyCode;

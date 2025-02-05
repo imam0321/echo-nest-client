@@ -2,10 +2,14 @@ import { useState } from "react"
 import PostEntry from "./PostEntry"
 import useAuth from "../../hooks/useAuth";
 import BlankProfile from "../../assets/images/blankProfile.jpeg"
+import useProfile from "../../hooks/useProfile";
 
 export default function NewPost() {
   const [showPostEntry, setShowPostEntry] = useState(false);
   const { auth } = useAuth();
+  const {state} = useProfile();
+
+  const user = state?.profile?.user ?? auth?.user;
 
   return (
     <>
@@ -15,7 +19,7 @@ export default function NewPost() {
             <div className="flex-center mb-3 gap-2 lg:gap-4">
               <img className="max-w-10 max-h-10 rounded-full lg:max-h-[58px] lg:max-w-[58px]"
                 src={auth?.user?.avatar
-                  ? `${import.meta.env.VITE_SERVER_BASE_URL}/${auth?.user?.avatar}`
+                  ? `${import.meta.env.VITE_SERVER_BASE_URL}/${user?.avatar}`
                   : BlankProfile} alt="avatar" />
 
               <div className="flex-1">

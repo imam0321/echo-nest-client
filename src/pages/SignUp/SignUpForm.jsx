@@ -68,6 +68,7 @@ export default function SignUpForm() {
           {...register("password", { required: "Password id Required", minLength: { value: 8, message: "Your password must be at lest 8 character" } })}
           type="password"
           name='password'
+          id='password'
           className={`w-full rounded-md border p-1.5 focus:outline-none lg:p-3 ${errors.password ? "border-red-500" : "border-[#CCCCCC]/[14%]"}`} />
       </Field>
       <p className='text-red-500 my-2'>{errors?.root?.random?.message}</p>
